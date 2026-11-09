@@ -14,15 +14,15 @@ class Je < Formula
   end
 
   test do
-    state = testpath/"profiles"
-    ENV["JE_FORMULA_TEST_KEY"] = "synthetic-homebrew-profile-key"
-    system bin/"je", "--state-dir", state, "profile", "add", "example",
-           "--endpoint", "https://models.example.test", "--model", "example-model",
-           "--key-env", "JE_FORMULA_TEST_KEY"
-    output = shell_output("#{bin}/je --state-dir #{state} profile show example")
-    assert_match "example-model", output
-    refute_match "synthetic-homebrew-profile-key", output
-    system bin/"je", "--state-dir", state, "profile", "remove", "example"
-    refute_path_exists state/"profiles/example.json"
+    # Profile writes store keys in macOS Keychain, which the Homebrew test
+    # sandbox cannot reach, so this test covers read-only surfaces instead.
+    assert_match "je #{version}", shell_output("#{bin}/je --version")
+    state = testpath/"state"
+    assert_match "je native core #{version}",
+                 shell_output("#{bin}/je --state-dir #{state} status")
+    assert_match "No saved connections",
+                 shell_output("#{bin}/je --state-dir #{state} profile list")
+    assert_match '"status" : "qualified"',
+                 shell_output("#{bin}/je support-matrix --json")
   end
 end

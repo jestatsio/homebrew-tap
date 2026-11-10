@@ -1,9 +1,9 @@
 class Je < Formula
   desc "Personal connections to J&E Studio models and memory"
   homepage "https://jestatsio.github.io/je/"
-  url "https://github.com/jestatsio/je/releases/download/v0.3.1/je-0.3.1-macos-arm64.tar.gz"
-  version "0.3.1"
-  sha256 "50c6b5f9768d271c05be9a36dd3e4a209faa6ecee37ac51454bdd4277d02af6a"
+  url "https://github.com/jestatsio/je/releases/download/v0.3.2/je-0.3.2-macos-arm64.tar.gz"
+  version "0.3.2"
+  sha256 "9d0b056f1b70e96aee26469448ea8603c3807e2d2a898232f93e28995caca7c0"
 
   depends_on :macos
   depends_on arch: :arm64
